@@ -10,5 +10,21 @@ class UsersController extends AppController
 	function logout() {
 		
 	}
+
+	function index() {
+
+	}
+
+	function profile() {
+
+	}
+
+	function setting() {
+
+	}
+
+	function register() {
+
+	}
 }
 ?>
