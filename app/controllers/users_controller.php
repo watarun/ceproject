@@ -2,6 +2,7 @@
 class UsersController extends AppController
 {
 	var $name = 'Users';
+	var $uses = null;
 	
 	function login() {
 		
