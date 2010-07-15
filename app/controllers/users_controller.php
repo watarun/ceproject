@@ -5,11 +5,11 @@ class UsersController extends AppController
 	var $uses = null;
 	
 	function login() {
-		
+		$this->redirect('/users/index');
 	}
 	
 	function logout() {
-		
+		$this->redirect('/users/registry');
 	}
 
 	function index() {
@@ -21,11 +21,11 @@ class UsersController extends AppController
 	}
 
 	function setting() {
-
+		$this->cakeError('error404');
 	}
 
-	function register() {
-
+	function registry() {
+		$this->layout = null;
 	}
 }
 ?>

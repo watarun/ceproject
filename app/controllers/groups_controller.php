@@ -1,14 +1,12 @@
 <?php
-class UsersController extends AppController
+class GroupsController extends AppController
 {
-	var $name = 'Users';
+	var $name = 'Groups';
+	var $uses = null;
 	
-	function login() {
-		
+	function index() {
+		$this->cakeError('error404');
 	}
 	
-	function logout() {
-		
-	}
 }
 ?>
