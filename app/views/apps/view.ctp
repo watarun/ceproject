@@ -1,29 +1,26 @@
-<div class="row">
-<button>review</button>
-<button>ranking</button>
-<button>start</button>
+<div class="row" style="width: 960px; height: 500px; background: black;">
 
-
-
-<div id="playground" style="width: 900px; height: 250px; background: black;"> 
-<div id="welcomeScreen" style="width: 900px; height: 250px; position: absolute; z-index: 100;"> 
-<div style="position: absolute; top: 120px; width: 900px; color: white;"> 
-<div id="loadingBar" style="position: relative; left: 100px; height: 15px; width: 0px; background: red;"></div><br /> 
-<center><a style="cursor: pointer;" id="startbutton">click here to show the demo</a></center> 
+<div id="playground"> 
+	<div id="welcomeScreen" style="width: 960px; height: 250px; position: absolute; z-index: 100;"> 
+		<div style="position: absolute; top: 120px; width: 960px; color: white;"> 
+			<span style="font-size:300%;">STAGE 1</span>
+			<div id="loadingBar" style="position: relative; left: 100px; height: 15px; width: 0px; background: red;"></div><br /> 
+			<center><a style="cursor: pointer;" id="startbutton">click here to show the demo</a></center> 
+		</div>
+	</div>
 </div>
-</div>
-</div>
-<div id="ansButton" style="position: absolute; top: 300px; width: 900px; display:none"> 
-<center>
-<button id="ans1" style="width:30%">1</button><button id="ans2" style="width:30%">2</button><button id="ans3" style="width:30%">3</button>
-</center>
+<div id="ansButton" style="position: absolute; top: 300px; width: 960px; display:none"> 
+	<center>
+	<button id="ans1" style="width:30%">1</button><button id="ans2" style="width:30%">2</button><button id="ans3" style="width:30%">3</button>
+	</center>
 </div>
 
+</div>
 <script type="text/javascript">
 <!--
 // Global constants:
-var PLAYGROUND_WIDTH    = 900;
-var PLAYGROUND_HEIGHT    = 250;
+var PLAYGROUND_WIDTH    = 960;
+var PLAYGROUND_HEIGHT    = 500;
 var REFRESH_RATE        = 15;
 var STAGE = 1;
 
@@ -59,18 +56,18 @@ function Player(node) {
 	return true;
 }
 
-// ——————————————————————————————————
-// —                      the main declaration:                     —
-// ——————————————————————————————————
+// 
+// the main declaration:
+// 
 
 $(function(){
     // Animations declaration:
     // Player space shipannimations:
     playerAnimation["star"]    = new $.gameQuery.Animation({
-        imageURL: "http://192.168.10.134/~fukunagawataru/cake/img/apple-logo.png"});
+		imageURL: "<?php echo $html->url('/img/apple-logo.png') ?>"});
 
     playerAnimation["star2"]    = new $.gameQuery.Animation({
-        imageURL: "http://192.168.10.134/~fukunagawataru/cake/img/candy-apple-blue-3.png", numberOfFrame: 2, delta: 128, rate: 100, type: $.gameQuery.ANIMATION_HORIZONTAL});
+        imageURL: "<?php echo $html->url('/img/candy-apple-blue-3.png') ?>", numberOfFrame: 2, delta: 128, rate: 100, type: $.gameQuery.ANIMATION_HORIZONTAL});
 
     // Initialize the game:
     $("#playground").playground({height: PLAYGROUND_HEIGHT,
