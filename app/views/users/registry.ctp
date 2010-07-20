@@ -18,8 +18,8 @@
             <div class="column grid_8">
                 <h1><?php echo $this->Html->link(__('Mirakoo', true), 'http://cakephp.org'); ?></h1>
             </div>
-            <div class="column grid_8">
-				<form method=post action="<?php echo $this->Html->url('/users/login',true)?>"
+            <div class="column grid_8" style="padding-top:5px;">
+				<form method=post action="<?php echo $this->Html->url('/users/login',true)?>">
                 username <input type=text> password <input type=text> <button type="submit">login</button>
 				</form>
             </div>
@@ -39,7 +39,7 @@
             <label><span>login id</span><input type=text></label>
             <label><span>e-mail</span><input type=text></label>
             <label><span>password</span><input type=text></label>
-            <label><span>sex</span><select><option>male</option></select></label>
+            <label><span>sex</span><select><option>male</option><option>female</option></select></label>
             <button>Submit</button>
             </div>
             </div>
