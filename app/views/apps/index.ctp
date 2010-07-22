@@ -9,7 +9,7 @@ Let's search new app!!
 
 <h2>flavor of the week</h2>
 <div class="row">
-<div class="column grid_4"><p style="border:1px solid #000;height:160px">NewApp1</p></div>
+<div class="column grid_4"><p style="border:1px solid #000;height:160px"><?php echo $this->Html->link(__('NewApp1', true), '/apps/detail/1'); ?></p></div>
 <div class="column grid_4"><p style="border:1px solid #000;height:160px">NewApp2</p></div>
 <div class="column grid_4"><p style="border:1px solid #000;height:160px">NewApp3</p></div>
 </div>
