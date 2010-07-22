@@ -2,6 +2,7 @@
 class App0001Controller extends AppController
 {
 	var $name = 'App0001';
+	var $uses = null;
 
 	/*
 	 * 初期表示画面
