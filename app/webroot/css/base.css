@@ -84,6 +84,26 @@ ul ul.circle,
 ul ul.square { margin-top: 4px; margin-bottom: 5px; }
 ol.sosumi { margin-left: 0; padding-left: 2em; }
 
+form input[type=text],
+form textarea{
+	background-image:-webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, rgb(255,255,255)),
+		color-stop(1, rgb(248,248,248))
+	);
+
+	background-image:-moz-linear-gradient(
+		center bottom,
+		rgb(255,255,255) 0%,
+		rgb(248,248,248) 100%
+	);
+
+	outline:none;
+	border:solid 1px #ccc;
+}
+
 /* for iPhone and iPad */
 @media screen and (max-device-width: 480px) {#globalfooter ul.piped a { margin-left: 1em; }}
 @media screen and (max-device-width: 1024px) {#globalfooter ul.piped a { margin-left: 1em; }}
