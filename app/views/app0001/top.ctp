@@ -1,5 +1,8 @@
 <?php $this->layout = null;?>
 <Module>
+
+<Content>
+
 <div class="row" style="width: 960px; height: 500px; background: black;">
 
 <div id="playground"> 
@@ -10,11 +13,6 @@
 			<center><a style="cursor: pointer;" id="startbutton">click here to show the demo</a></center> 
 		</div>
 	</div>
-</div>
-<div id="ansButton" style="position: absolute; top: 450px; width: 960px; display:none"> 
-	<center>
-	<button id="ans1" style="width:30%">1</button><button id="ans2" style="width:30%">2</button><button id="ans3" style="width:30%">3</button>
-	</center>
 </div>
 
 </div>
@@ -28,6 +26,7 @@ var STAGE = 1;
 
 // Gloabl animation holder
 var playerAnimation = new Array();
+var buttonAnimation = new Array();
 
 // Game object:
 function Player(node) {
@@ -36,8 +35,13 @@ function Player(node) {
 		var pos = parseInt(this.node.css("top"));
 		if(pos < (PLAYGROUND_HEIGHT - 228)){
 			this.node.css("top",""+(pos + speed)+"px");
-		} else if ($("#ansButton").css("display") == "none"){
-			$("#ansButton").fadeIn("slow");
+		} else {
+			$("#actors").addSprite("ansButton1",{animation: buttonAnimation["wrong"],posx:PLAYGROUND_WIDTH/4-64,posy:350,width:128,height:128})
+			$("#ansButton1")[0].button = new Button($("#andButton1"));
+			$("#actors").addSprite("ansButton2",{animation: buttonAnimation["right"],posx:PLAYGROUND_WIDTH/2-64,posy:350,width:128,height:128})
+			$("#ansButton1")[0].button = new Button($("#ansButton2"));
+			$("#actors").addSprite("ansButton3",{animation: buttonAnimation["wrong"],posx:PLAYGROUND_WIDTH/4*3-64,posy:350,width:128,height:128})
+			$("#ansButton3")[0].button = new Button($("#ansButton3"));
 		}
 	}
 
@@ -76,8 +80,8 @@ $(function(){
         imageURL: "<?php echo $html->url('/img/candy-apple-blue-3.png') ?>", numberOfFrame: 2, delta: 128, rate: 100, type: $.gameQuery.ANIMATION_HORIZONTAL});
 
 	// Button
-	buttonAnimation["wrong"] = new $.gameQuery.Animation8{imageURL: "http://icons.iconseeker.com/png/128/buttons/button-close.png"});
-	buttonAnimation["right"] = new $.gameQuery.Animation8{imageURL: "http://icons.iconseeker.com/png/128/buttons/button-info.png"});
+	buttonAnimation["wrong"] = new $.gameQuery.Animation({imageURL: "http://icons.iconseeker.com/png/128/buttons/button-close.png"});
+	buttonAnimation["right"] = new $.gameQuery.Animation({imageURL: "http://icons.iconseeker.com/png/128/buttons/button-info.png"});
 
     // Initialize the game:
     $("#playground").playground({height: PLAYGROUND_HEIGHT,
@@ -103,10 +107,12 @@ $(function(){
         });
     });
 
-	$("#player1").click(function(){
+	$("#ansButton2").click(function(){
 		alert("Yes!");
 		STAGE = 2;
-        $("#ansButton").fadeOut("slow");
+        $("#ansButton1").fadeOut("slow");
+        $("#ansButton2").fadeOut("slow");
+        $("#ansButton3").fadeOut("slow");
 		$("#player1").remove();
 		$("#player2").remove();
 		$("#actors").addSprite("player1",{animation: playerAnimation["star"],posx:PLAYGROUND_WIDTH/4,posy:0,width:128,height:128})
@@ -154,4 +160,6 @@ $(function(){
 
 -->
 </script>
+
+</Content>
 </Module>
