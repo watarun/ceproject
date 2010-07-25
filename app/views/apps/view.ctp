@@ -1,7 +1,7 @@
 <?php
 
 $orgdoc = new DOMDocument;
-$orgdoc->loadXML(file_get_contents("http://localhost/cake/app0001/top"));
+$orgdoc->loadXML(file_get_contents("http://localhost/~fukunagawataru/cake/app0001/top"));
 
 // The node we want to import to a new document
 $node = $orgdoc->getElementsByTagName("Content")->item(0);

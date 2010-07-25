@@ -36,12 +36,9 @@ function Player(node) {
 		if(pos < (PLAYGROUND_HEIGHT - 228)){
 			this.node.css("top",""+(pos + speed)+"px");
 		} else {
-			$("#actors").addSprite("ansButton1",{animation: buttonAnimation["wrong"],posx:PLAYGROUND_WIDTH/4-64,posy:350,width:128,height:128})
-			$("#ansButton1")[0].button = new Button($("#andButton1"));
-			$("#actors").addSprite("ansButton2",{animation: buttonAnimation["right"],posx:PLAYGROUND_WIDTH/2-64,posy:350,width:128,height:128})
-			$("#ansButton1")[0].button = new Button($("#ansButton2"));
-			$("#actors").addSprite("ansButton3",{animation: buttonAnimation["wrong"],posx:PLAYGROUND_WIDTH/4*3-64,posy:350,width:128,height:128})
-			$("#ansButton3")[0].button = new Button($("#ansButton3"));
+			makeLeftButton("wrong");
+			makeCenterButton("right");
+			makeRightButton("wrong");
 		}
 	}
 
@@ -64,6 +61,25 @@ function Player(node) {
 
 function Button(node) {
 	this.node = node;
+}
+
+//左ボタン生成
+function makeLeftButton(animation) {
+	$("#actors").addSprite("ansButton1",
+		{animation: buttonAnimation[animation],posx:PLAYGROUND_WIDTH/4-64,posy:350,width:128,height:128})
+	$("#ansButton1")[0].button = new Button($("#andButton1"));
+}
+//真中ボタン生成
+function makeCenterButton(animation) {
+	$("#actors").addSprite("ansButton2",
+		{animation: buttonAnimation["right"],posx:PLAYGROUND_WIDTH/2-64,posy:350,width:128,height:128})
+	$("#ansButton1")[0].button = new Button($("#ansButton2"));
+}
+//右ボタン生成
+function makeRightButton(animation) {
+	$("#actors").addSprite("ansButton3",
+		{animation: buttonAnimation["wrong"],posx:PLAYGROUND_WIDTH/4*3-64,posy:350,width:128,height:128})
+	$("#ansButton3")[0].button = new Button($("#ansButton3"));
 }
 
 // 
@@ -92,9 +108,11 @@ $(function(){
     $.playground().addGroup("actors", {width: PLAYGROUND_WIDTH,
                                        height: PLAYGROUND_HEIGHT});
 
-	$("#actors").addSprite("player1",{animation: playerAnimation["star2"],posx:PLAYGROUND_WIDTH/3,posy:0,width:128,height:128})
+	$("#actors").addSprite("player1",
+		{animation: playerAnimation["star2"],posx:PLAYGROUND_WIDTH/3,posy:0,width:128,height:128})
 	$("#player1")[0].player = new Player($("#player1"));
-	$("#actors").addSprite("player2",{animation: playerAnimation["star2"],posx:PLAYGROUND_WIDTH/3*2,posy:0,width:128,height:128})
+	$("#actors").addSprite("player2",
+		{animation: playerAnimation["star2"],posx:PLAYGROUND_WIDTH/3*2,posy:0,width:128,height:128})
 	$("#player2")[0].player = new Player($("#player2"));
 
 	// this sets the id of the loading bar:
@@ -107,19 +125,22 @@ $(function(){
         });
     });
 
-	$("#ansButton2").click(function(){
+	$("#ansButton2").live("click",function(){
 		alert("Yes!");
 		STAGE = 2;
-        $("#ansButton1").fadeOut("slow");
-        $("#ansButton2").fadeOut("slow");
-        $("#ansButton3").fadeOut("slow");
+        $("#ansButton1").remove();
+        $("#ansButton2").remove();
+        $("#ansButton3").remove();
 		$("#player1").remove();
 		$("#player2").remove();
-		$("#actors").addSprite("player1",{animation: playerAnimation["star"],posx:PLAYGROUND_WIDTH/4,posy:0,width:128,height:128})
+		$("#actors").addSprite("player1",
+			{animation: playerAnimation["star"],posx:PLAYGROUND_WIDTH/4,posy:0,width:128,height:128})
 		$("#player1")[0].player = new Player($("#player1"));
-		$("#actors").addSprite("player2",{animation: playerAnimation["star"],posx:PLAYGROUND_WIDTH/4*2,posy:0,width:128,height:128})
+		$("#actors").addSprite("player2",
+			{animation: playerAnimation["star"],posx:PLAYGROUND_WIDTH/4*2,posy:0,width:128,height:128})
 		$("#player2")[0].player = new Player($("#player2"));
-		$("#actors").addSprite("player3",{animation: playerAnimation["star"],posx:PLAYGROUND_WIDTH/4*3,posy:0,width:128,height:128})
+		$("#actors").addSprite("player3",
+			{animation: playerAnimation["star"],posx:PLAYGROUND_WIDTH/4*3,posy:0,width:128,height:128})
 		$("#player3")[0].player = new Player($("#player3"));
 	});
 
