@@ -6,6 +6,7 @@
 <div class="row" style="width: 960px; height: 500px; background: black;">
 
 <div id="playground"> 
+	<span id="point" style="font-size:300%;float:right;">00</span>
 	<div id="welcomeScreen" style="width: 960px; height: 250px; position: absolute; z-index: 100;"> 
 		<div style="position: absolute; top: 120px; width: 960px; color: white;"> 
 			<span style="font-size:300%;">STAGE 1</span>
@@ -27,6 +28,7 @@ var STAGE = 1;
 // Gloabl animation holder
 var playerAnimation = new Array();
 var buttonAnimation = new Array();
+var flagAnimation = new Array();
 
 // Game object:
 function Player(node) {
@@ -61,6 +63,67 @@ function Player(node) {
 
 function Button(node) {
 	this.node = node;
+}
+
+function makeStage1() {
+	$("#actors").addSprite("player1",
+		{animation: playerAnimation["star2"],posx:PLAYGROUND_WIDTH/3,posy:0,width:128,height:128})
+	$("#player1")[0].player = new Player($("#player1"));
+	$("#actors").addSprite("player2",
+		{animation: playerAnimation["star2"],posx:PLAYGROUND_WIDTH/3*2,posy:0,width:128,height:128})
+	$("#player2")[0].player = new Player($("#player2"));
+	
+	$("#ansButton2").live("click",ansClick);
+
+	function ansClick() {
+		alert("Yes!");
+		STAGE = 2;
+        $("#ansButton1").remove();
+        $("#ansButton2").remove();
+        $("#ansButton3").remove();
+		$("#player1").remove();
+		$("#player2").remove();
+		$("#ansButton2").die("click",ansClick);
+		addPoint(5);
+		makeStage2();
+	}
+}
+
+function makeStage2() {
+	$("#actors").addSprite("player1",
+		{animation: playerAnimation["star"],posx:PLAYGROUND_WIDTH/4,posy:0,width:128,height:128})
+	$("#player1")[0].player = new Player($("#player1"));
+	$("#actors").addSprite("player2",
+		{animation: playerAnimation["star"],posx:PLAYGROUND_WIDTH/4*2,posy:0,width:128,height:128})
+	$("#player2")[0].player = new Player($("#player2"));
+	$("#actors").addSprite("player3",
+		{animation: playerAnimation["star"],posx:PLAYGROUND_WIDTH/4*3,posy:0,width:128,height:128})
+	$("#player3")[0].player = new Player($("#player3"));
+	
+	$("#ansButton2").live("click",ansClick);
+
+	function ansClick(){
+		alert("Yes!");
+		STAGE = 2;
+        $("#ansButton1").remove();
+        $("#ansButton2").remove();
+        $("#ansButton3").remove();
+		$("#player1").remove();
+		$("#player2").remove();
+		$("#player3").remove();
+		$("#ansButton2").die("click",ansClick);
+		addPoint(5);
+		makeStage3();
+	};
+
+}
+
+function makeStage3() {
+	makeStage2();
+}
+
+function addPoint(p) {
+	$('#point').text(eval($('#point').text()) + p);
 }
 
 //左ボタン生成
@@ -99,6 +162,10 @@ $(function(){
 	buttonAnimation["wrong"] = new $.gameQuery.Animation({imageURL: "http://icons.iconseeker.com/png/128/buttons/button-close.png"});
 	buttonAnimation["right"] = new $.gameQuery.Animation({imageURL: "http://icons.iconseeker.com/png/128/buttons/button-info.png"});
 
+	//Flag
+	flagAnimation["wrong"] = new $.gameQuery.Animation({imageURL: "http://icons.iconseeker.com/png/fullsize/kde-kids-applications/agt-action-fail-1.png"});
+	flagAnimation["right"] = new $.gameQuery.Animation({imageURL: "http://icons.iconseeker.com/png/fullsize/kde-kids-applications/agt-action-success-1.png"});
+
     // Initialize the game:
     $("#playground").playground({height: PLAYGROUND_HEIGHT,
                                  width: PLAYGROUND_WIDTH,
@@ -108,13 +175,7 @@ $(function(){
     $.playground().addGroup("actors", {width: PLAYGROUND_WIDTH,
                                        height: PLAYGROUND_HEIGHT});
 
-	$("#actors").addSprite("player1",
-		{animation: playerAnimation["star2"],posx:PLAYGROUND_WIDTH/3,posy:0,width:128,height:128})
-	$("#player1")[0].player = new Player($("#player1"));
-	$("#actors").addSprite("player2",
-		{animation: playerAnimation["star2"],posx:PLAYGROUND_WIDTH/3*2,posy:0,width:128,height:128})
-	$("#player2")[0].player = new Player($("#player2"));
-
+	
 	// this sets the id of the loading bar:
     $().setLoadBar("loadingBar", 400);
 
@@ -125,24 +186,9 @@ $(function(){
         });
     });
 
-	$("#ansButton2").live("click",function(){
-		alert("Yes!");
-		STAGE = 2;
-        $("#ansButton1").remove();
-        $("#ansButton2").remove();
-        $("#ansButton3").remove();
-		$("#player1").remove();
-		$("#player2").remove();
-		$("#actors").addSprite("player1",
-			{animation: playerAnimation["star"],posx:PLAYGROUND_WIDTH/4,posy:0,width:128,height:128})
-		$("#player1")[0].player = new Player($("#player1"));
-		$("#actors").addSprite("player2",
-			{animation: playerAnimation["star"],posx:PLAYGROUND_WIDTH/4*2,posy:0,width:128,height:128})
-		$("#player2")[0].player = new Player($("#player2"));
-		$("#actors").addSprite("player3",
-			{animation: playerAnimation["star"],posx:PLAYGROUND_WIDTH/4*3,posy:0,width:128,height:128})
-		$("#player3")[0].player = new Player($("#player3"));
-	});
+	makeStage1();
+
+	
 
 	//実行中繰り返し処理
 	$.playground().registerCallback(function(){
