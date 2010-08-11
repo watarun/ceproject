@@ -76,7 +76,6 @@ function makeStage1() {
 	$("#ansButton2").live("click",ansClick);
 
 	function ansClick() {
-		alert("Yes!");
 		STAGE = 2;
         $("#ansButton1").remove();
         $("#ansButton2").remove();
@@ -85,7 +84,7 @@ function makeStage1() {
 		$("#player2").remove();
 		$("#ansButton2").die("click",ansClick);
 		addPoint(5);
-		makeStage2();
+		success(makeStage2());
 	}
 }
 
@@ -103,7 +102,6 @@ function makeStage2() {
 	$("#ansButton2").live("click",ansClick);
 
 	function ansClick(){
-		alert("Yes!");
 		STAGE = 2;
         $("#ansButton1").remove();
         $("#ansButton2").remove();
@@ -113,7 +111,7 @@ function makeStage2() {
 		$("#player3").remove();
 		$("#ansButton2").die("click",ansClick);
 		addPoint(5);
-		makeStage3();
+		success(makeStage3());
 	};
 
 }
@@ -145,6 +143,13 @@ function makeRightButton(animation) {
 	$("#ansButton3")[0].button = new Button($("#ansButton3"));
 }
 
+function success(fun) {
+	$("#actors").addSprite("successFlg",
+		{animation: flagAnimation["right"],posx:PLAYGROUND_WIDTH/4*3-64,posy:350,width:128,height:128})
+	$("#successFlg")[0].button = new Button($("#successFlg"));
+	$("#successFlg").fadeTo(1000,0,function(){$(this).remove();});
+	return fun;
+}
 // 
 // the main declaration:
 // 
