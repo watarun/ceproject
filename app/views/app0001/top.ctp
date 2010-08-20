@@ -9,10 +9,16 @@
 	<span id="point" style="font-size:300%;float:right;">00</span>
 	<div id="welcomeScreen" style="width: 960px; height: 250px; position: absolute; z-index: 100;"> 
 		<div style="position: absolute; top: 120px; width: 960px; color: white;"> 
+			<center>
 			<span style="font-size:300%;">STAGE 1</span>
 			<div id="loadingBar" style="position: relative; left: 100px; height: 15px; width: 0px; background: red;"></div><br /> 
-			<center><a style="cursor: pointer;" id="startbutton">click here to show the demo</a></center> 
+			<a style="cursor: pointer;" id="startbutton">click here to show the demo</a></center> 
 		</div>
+	</div>
+	<div id="finishScreen" style="width: 960px; top: 100px; position: absolute; z-index: 100;display: none;"> 
+			<center><span style="font-size:300%; color: white;">
+			Your points is : 95<br/>Time is : 10:55<br/>Congratulation!! Stage 1 Clear!!
+			</span></center>
 	</div>
 </div>
 
@@ -117,7 +123,7 @@ function makeStage2() {
 }
 
 function makeStage3() {
-	makeStage2();
+    $("#finishScreen").show();
 }
 
 function addPoint(p) {
@@ -161,15 +167,18 @@ $(function(){
 		imageURL: "<?php echo $html->url('/img/apple-logo.png') ?>"});
 
     playerAnimation["star2"]    = new $.gameQuery.Animation({
-        imageURL: "<?php echo $html->url('/img/candy-apple-blue-3.png') ?>", numberOfFrame: 2, delta: 128, rate: 100, type: $.gameQuery.ANIMATION_HORIZONTAL});
+		imageURL: "<?php echo $html->url('/img/candy-apple-blue-3.png') ?>",
+					numberOfFrame: 2, delta: 128, rate: 100, type: $.gameQuery.ANIMATION_HORIZONTAL});
 
 	// Button
 	buttonAnimation["wrong"] = new $.gameQuery.Animation({imageURL: "http://icons.iconseeker.com/png/128/buttons/button-close.png"});
 	buttonAnimation["right"] = new $.gameQuery.Animation({imageURL: "http://icons.iconseeker.com/png/128/buttons/button-info.png"});
 
 	//Flag
-	flagAnimation["wrong"] = new $.gameQuery.Animation({imageURL: "http://icons.iconseeker.com/png/fullsize/kde-kids-applications/agt-action-fail-1.png"});
-	flagAnimation["right"] = new $.gameQuery.Animation({imageURL: "http://icons.iconseeker.com/png/fullsize/kde-kids-applications/agt-action-success-1.png"});
+	flagAnimation["wrong"] = new $.gameQuery.Animation({
+		imageURL: "http://icons.iconseeker.com/png/fullsize/kde-kids-applications/agt-action-fail-1.png"});
+	flagAnimation["right"] = new $.gameQuery.Animation({
+		imageURL: "http://icons.iconseeker.com/png/fullsize/kde-kids-applications/agt-action-success-1.png"});
 
     // Initialize the game:
     $("#playground").playground({height: PLAYGROUND_HEIGHT,
